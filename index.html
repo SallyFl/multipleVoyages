@@ -94,18 +94,17 @@ var height = 500;
 
 
   d3.queue()
-  //.defer(d3.json, "data/world110m.json")
-    .defer(d3.csv, "data/multipleVoyages.csv")
-    .await(ready);
+  .defer(d3.json, "data/world110m.json")
+  .defer(d3.csv, "data/multipleVoyages.csv")
+  .await(ready);
 
-//function ready (error, oceans, data){
-  function ready (error, data){ // testing data only
+function ready (error, oceans, data){
+  //function ready (error, data){ // testing data only - no map data
 
     data.forEach(function(d) { // do I even need this forEach
       d.year = formatYear(parseYear(+d.year));
       d.lon = +d.lon;
       d.lat = +d.lat;
-    //  d.VoyageID = d.VoyageID;
 });
 
     var dataGroup = d3.nest()
@@ -116,8 +115,8 @@ var height = 500;
 
 dataGroup.forEach(function(d,i) {
 
-/*
-//map commented out for now to make looking at elements easier
+ 
+//map can be commented out to make looking at elements easier
 var ocean = svg.selectAll( "path" )
   .data(topojson.object(oceans, oceans.objects.countries)
   .geometries)
@@ -125,7 +124,6 @@ var ocean = svg.selectAll( "path" )
     .append( "path" )
     .attr("fill", "white")
     .attr( "d", geoPath );
-*/
 
 var buttonGroups = d3.selectAll("button")
     .data(dataGroup)
