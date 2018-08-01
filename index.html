@@ -273,7 +273,7 @@ function clickPrint(d) {
     var voyageClass = d3.select(this).attr("data-group");
     var voyageID = d3.select(this).select("p").attr("data-group");
 
-    // would like help in getting all ids, ie #path_3 and #path_4, so each marker and line can transition if button is clicked - in code below where I have hard coded the markers and paths this works fine
+     // would like help in getting all ids,  e.g. #path_3 and #path_4 from one data-group, e.g. 1845, so each marker and line can transition if button is clicked. In code below where I have hard coded the markers and paths for 1845 this works fine but there could be more individual voyages in a year group so would like to do this from the data
     //console.log(voyageID);
 
     d3.select(".voyage_" + voyageClass).style("opacity", 1.0)
