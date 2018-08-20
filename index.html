@@ -88,7 +88,7 @@ var height = 600;
 
   d3.queue()
     .defer(d3.json, "data/world110m.json")
-    .defer(d3.csv, "data/multipleVoyages3.csv")
+    .defer(d3.csv, "data/multipleVoyages.csv")
     .await(ready);
 
 function ready (error, oceans, data){
