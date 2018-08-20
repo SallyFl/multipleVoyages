@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>test multiple voyages</title>
+    <title>working version 2</title>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/topojson.v0.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -62,7 +62,7 @@
 
 
 var width = 1300;
-var height = 500;
+var height = 600;
 
  var margin ={top: 10, right: 10,bottom: 50, left:10}
 
@@ -88,7 +88,7 @@ var height = 500;
 
   d3.queue()
     .defer(d3.json, "data/world110m.json")
-    .defer(d3.csv, "data/multipleVoyages.csv")
+    .defer(d3.csv, "data/multipleVoyages3.csv")
     .await(ready);
 
 function ready (error, oceans, data){
@@ -210,58 +210,39 @@ var placeGroups = voyageGroups.selectAll(".placeVisited")
 
 //buttons
 d3.select("#button_1961").on("click", function(d){
-  tryAgain(d,i);
   clickButton(d,i);
 });
 d3.select("#button_1906").on("click", function(d){
-  tryAgain(d,i);
   clickButton(d,i);
 });
 d3.select("#button_1845").on("click", function(d){
-  tryAgain(d,i);
   clickButton(d,i);
 });
 d3.select("#button_1888").on("click", function(d){
-  tryAgain(d,i);
   clickButton(d,i);
 });
 
 
-var animation;
-var isAnimating = false
+function clickButton(d,i) {
+var voyageClass = d.key;
 
-function tryAgain(d,i){
-if(isAnimating){
-  clearInterval(animation)
-  d3.select("#dataTitle_"+ voyageID)
-  //textGroups.text.exit().remove();
-}
-else{
 var voyageID = d.values[0].key;
-console.log(voyageID);
 
-
+d3.select(".voyage_" + voyageClass).style("opacity", 1.0)
 
 var j = 0;
 var animation = setInterval(function(){
+
 d3.select("#dataTitle_"+ voyageID)
-    .text(function(d) { return d.values[j].arrivalDateTxt; });
-    j = j + 1;
-    if(j==d.values[0].values.length)
-      clearInterval(animation)
-    },1000);
-  }
-  isAnimating = !isAnimating;
-}
-
-
-function clickButton(d,i) {
-  var voyageClass = d.key;
-  //console.log(voyageClass);
-  var voyageID = d.values[0].key; // gives 1,2,3 on click
-  //console.log(voyageID);
-
-d3.select(".voyage_" + voyageClass).style("opacity", 1.0)
+    .text(function(d) { return d.values[j].arrivalDateTxt +" "+d.values[j].placeName; });
+      j = j + 1;
+      console.log(j);
+      if(j==d.values[0].values.length)
+       clearInterval(animation)
+         if(j==d.values[0].values.length)
+         d3.select("#dataTitle_"+ voyageID)
+         .text("")
+     },1000);
 
 d3.select("circle#Marker_"+ voyageID)
   .transition()
@@ -284,6 +265,29 @@ d3.select("#path_" + voyageID)
   .attr("stroke-dashoffset", 0)
 
 }
+
+function transition(){
+   voyageMarker.transition()
+   .ease(d3.easeLinear)
+   .duration(5000)
+   .attrTween("transform", createPathTween)
+
+   paths.transition()
+   .attr("stroke-dasharray", function() {
+     var totalLength = this.getTotalLength();
+     return totalLength + " " + totalLength;
+   })
+   .attr("stroke-dashoffset", function() {
+     var totalLength = this.getTotalLength();
+     return totalLength;
+   })
+   .transition()
+   .ease(d3.easeLinear)
+   .duration(5000)
+   .attr("stroke-dashoffset", 0)
+  //.on("end", transition);
+}
+transition();
 
 function createPathTween(d, i, a) {
 
