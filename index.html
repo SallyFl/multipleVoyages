@@ -415,7 +415,7 @@ var voyageData = d3.select("#mapdata").selectAll(".voyageData")
         j = j + 1;
 
         if(j==d.values[0].values.length) { stopAnimation(animation, voyageID); }
-      },2000);
+      },1000);
 
       runningAnimation = { animation: animation, voyageID: voyageID };
 
@@ -434,7 +434,7 @@ var voyageData = d3.select("#mapdata").selectAll(".voyageData")
   d3.select("circle#Marker_"+ voyageID)
     .transition()
     .ease(d3.easeLinear)
-    .duration(9000)
+    .duration(9500)
     .attrTween("transform", createPathTween);
 
   //animate voyage path line
@@ -449,7 +449,7 @@ var voyageData = d3.select("#mapdata").selectAll(".voyageData")
     })
     .transition()
     .ease(d3.easeLinear)
-    .duration(9000)
+    .duration(9500)
     .attr("stroke-dashoffset", 0)
   }
 
