@@ -272,7 +272,7 @@ var voyageData = d3.select("#map").select("#mapdata").selectAll(".voyageData")
       .attr("class", function(d){return "voyageGroup voyage_" + d.key})
       .attr("datagroup", function(d){return d.key})
       .attr("id", function(d){return "group_" + d.key})
-      .style("opacity", 0.2)
+      .style("opacity", 0.3)
       .on ("mouseover", mouseOver);
 
   var paths = voyageGroups.selectAll(".journey")
@@ -426,7 +426,7 @@ var voyageData = d3.select("#map").select("#mapdata").selectAll(".voyageData")
   function transition(){
      voyageMarker.transition()
      .ease(d3.easeLinear)
-     .duration(5000)
+     .duration(9500)
      .attrTween("transform", createPathTween)
 
 
@@ -441,7 +441,7 @@ var voyageData = d3.select("#map").select("#mapdata").selectAll(".voyageData")
      })
      .transition()
      .ease(d3.easeLinear)
-     .duration(5000)
+     .duration(9500)
      .attr("stroke-dashoffset", 0)
     // .on("end", transition);
   }
