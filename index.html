@@ -37,7 +37,7 @@
   }
 
 .place:hover{
-  fill:hotpink;
+  fill: #00FF40;
   r:10;
 }
 .dateText{
@@ -192,7 +192,13 @@ var voyageLine = d3.line()
   .y(function(d) {return projection([d.lon, d.lat])[1];})
   .curve(d3.curveCatmullRom);
 
-var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+  //var color = d3.scaleOrdinal(d3.schemeCategory10);
+  var color = d3.scaleOrdinal()
+  //.range(["#FA58F4", "#FF8000" , "#01DF74","#8258FA"]);
+  .range(["#084B8A", "#FE642E" , "#FE2EC8","#81BEF7"]);
+
+
 
 
 //tooltip for mouseover
@@ -202,8 +208,8 @@ var tooltip = d3.select("body").append("div")
 
 d3.queue()
   .defer(d3.json, "data/world110m.json")
-  //.defer(d3.csv, "data/voyageData.csv")
- .defer(d3.csv, "data/multipleVoyages.csv")
+  .defer(d3.csv, "data/voyageData.csv")
+ //.defer(d3.csv, "data/multipleVoyages.csv")
   .await(ready);
 
 function ready (error, oceans, data){
@@ -347,7 +353,8 @@ var voyageData = d3.select("#map").select("#mapdata").selectAll(".voyageData")
 
   function clickButton(d,i) {
 
-   if (runningAnimation) { stopAnimation(runningAnimation.animation, runningAnimation.voyageID); }
+
+   if (runningAnimation) { stopAnimation(runningAnimation.animation, runningAnimation.voyageID); }//if this is commented out then each animation will show on screen
 
     var voyageClass = d.key;
 
@@ -375,6 +382,7 @@ var voyageData = d3.select("#map").select("#mapdata").selectAll(".voyageData")
     .attr("href", function(d){return d.values[j].groupURL })
     .append("img")
     .attr("src", function(d){return "images/" +d.values[j].groupPic })
+
 
   //style voyage line and circles
   d3.select(".voyage_" + voyageClass).style("opacity", 1.0)
@@ -409,7 +417,8 @@ var voyageData = d3.select("#map").select("#mapdata").selectAll(".voyageData")
       var voyageID = d.values[0].key;
 
       d3.select("#button_" + voyageClass).style("background-color", function(d){ return color(voyageID)})
-      d3.select("#group_" + voyageClass).style("opacity", 1)
+      d3.select("#group_" + voyageClass).style("opacity", 1) // maybe get rid of this?
+
 
   }
 
@@ -419,6 +428,7 @@ var voyageData = d3.select("#map").select("#mapdata").selectAll(".voyageData")
      .ease(d3.easeLinear)
      .duration(5000)
      .attrTween("transform", createPathTween)
+
 
      paths.transition()
      .attr("stroke-dasharray", function() {
@@ -450,7 +460,7 @@ var voyageData = d3.select("#map").select("#mapdata").selectAll(".voyageData")
         };
       }
     });
-
+  //});//
   }
 
   //resize
