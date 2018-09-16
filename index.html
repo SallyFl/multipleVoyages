@@ -208,8 +208,8 @@ var tooltip = d3.select("body").append("div")
 
 d3.queue()
   .defer(d3.json, "data/world110m.json")
-  .defer(d3.csv, "data/voyageData.csv")
- //.defer(d3.csv, "data/multipleVoyages.csv")
+  //.defer(d3.csv, "data/voyageData.csv")
+  .defer(d3.csv, "data/multipleVoyages.csv")
   .await(ready);
 
 function ready (error, oceans, data){
