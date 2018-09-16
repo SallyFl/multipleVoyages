@@ -14,16 +14,16 @@
 
   <style>
 
-  * {
-      box-sizing: border-box;
-  }
   body {
     font-family: 'IBM Plex Serif', serif;
+    color:#6E6E6E;
   }
+
   svg {
   display: block;
   margin: auto;
-  background-color: #D2DCE7;
+  background-color: #EAECEE  ;
+
   }
 
   img{
@@ -31,38 +31,14 @@
     width:90%;
   }
 
-  h1{
-
-
-  }
-
-  h2{
-    line-height: 30px;
-
-  }
-  .row::after {
-      content: "";
-      clear: both;
-      display: table;
-  }
-  [class*="col-"] {
-      float: left;
-      padding: 15px;
-  }
-
-.header {
-  /*  background-color:#FA5882;*/
-  background-color: #FE642E;
-    color: #ffffff;
-    padding: 10px;
-}
-
 .journey {
   fill: none;
   stroke-width: 2;
   }
+
 .place:hover{
   fill:hotpink;
+  r:10;
 }
 .dateText{
   font-size: 20px;
@@ -92,113 +68,84 @@
 
 .tooltip {
   width:auto;
-  height: auto;
-  padding: 5px;
+  height:50px;
+  padding: 3px;
   opacity:0;
-  /*background-color: white;
-  -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-  */
-}
-
-
-#map{
-  position:relative;
-}
-#mapdata {
-  color: #6E6E6E;
-  width:25%;
-  height:auto;
-  padding: 10px;
   background-color: white;
   -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-  position:absolute;
-  right: 0px;
-  opacity: 0;
-}
-
-#mapdata h1{
-  font-size: 20px;
-  color: red;
-  line-height: 12px;
-}
-
-#mapdata h2{
-  font-size: 15px;
-/*  font-weight: bold;*/
-  /*color: red;*/
-  line-height: 12px;
-}
-
-#mapdata p{
-font-size: 12px;
-font-weight: bold;
 
 }
+
 .images{
   width:80%;
 }
 
-/* For mobile phones: */
-[class*="col-"] {
-    width: 100%;
-
+#header{
+    background-color: orange;
+    color: #ffffff;
+    width:100%;
+    margin-left:15px;
+    margin-right: 15px;
+    padding: 10px;
 }
-/*
-@media only screen and (max-width: 600px) {
-  .header{
-    display: none;
+#map
+  {
+    position: relative;
+    display: inline-block;
+    width:100%;
+    margin-left:15px;
+    margin-right: 15px;
   }
-  #mapdata{
-    color: #6E6E6E;
-    width:auto;
-    height:auto;
-    position:absolute;
-  }
-}*/
-@media only screen and (max-width: 600px) and (orientation:landscape){
-  .header{
-    display: none;
-  }
-  #mapdata{
 
+  #mapdata
+  {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width:25%;
+    height: 200px;
+  }
+
+  #buttons {
+    width:100%;
+    height:80px;
+    margin-left:15px;
+    margin-right: 15px;
+  }
+
+@media only screen and (max-width: 600px) and (orientation:portrait){
+
+  #map
+  {
+    position: absolute;
+    width:100%;
+    height: 300px;
+    margin-left:15px;
+    margin-right: 15px;
+  }
+
+  #buttons {
+    width:100%;
+    height:40px;
+    margin-left:15px;
+    margin-right: 15px;
+    position:relative;
+    top:150px;
+  }
+
+  #mapdata
+  {
+    width:100%;
+    height: 250px;
+    position:relative;
+    top:20px;
+  }
+  .place:hover{
+  r:20;
   }
 }
-@media only screen and (min-width: 600px) {
-    /* For tablets: */
-    .col-s-1 {width: 8.33%;}
-    .col-s-2 {width: 16.66%;}
-    .col-s-3 {width: 25%;}
-    .col-s-4 {width: 33.33%;}
-    .col-s-5 {width: 41.66%;}
-    .col-s-6 {width: 50%;}
-    .col-s-7 {width: 58.33%;}
-    .col-s-8 {width: 66.66%;}
-    .col-s-9 {width: 75%;}
-    .col-s-10 {width: 83.33%;}
-    .col-s-11 {width: 91.66%;}
-    .col-s-12 {width: 100%;}
-}
-@media only screen and (min-width: 768px) {
-    /* For desktop: */
-    .col-1 {width: 8.33%;}
-    .col-2 {width: 16.66%;}
-    .col-3 {width: 25%;}
-    .col-4 {width: 33.33%;}
-    .col-5 {width: 41.66%;}
-    .col-6 {width: 50%;}
-    .col-7 {width: 58.33%;}
-    .col-8 {width: 66.66%;}
-    .col-9 {width: 75%;}
-    .col-10 {width: 83.33%;}
-    .col-11 {width: 91.66%;}
-    .col-12 {width: 100%;}
-}
-
-
 
 </style>
 </head>
@@ -206,17 +153,16 @@ font-weight: bold;
 <body>
 <div id ="container">
 
-  <div class ="header">
+  <div id ="header">
     <h1>Life on the ocean waves</h1>
   </div>
 
-  <div class="col-12 col-s-12">
   <div id = "map">
+    <div id ="svg"></div>
     <div id ="mapdata"></div>
   </div>
-  <div id = "buttons"></div>
-  </div>
 
+  <div id = "buttons"></div>
 
 </div>
 <script>
@@ -225,7 +171,8 @@ var mapWidth = $("#map").width(),
     width = 1300,
     height = 500;
 
-var svg = d3.select("#map").append("svg")
+
+var svg = d3.select("#svg").append("svg")
     .attr("preserveAspectRatio", "xMidYMid")
     .attr("viewBox", "0 0 " + width + " " + height)
     .attr("width", mapWidth)
@@ -271,6 +218,7 @@ var dataGroup = d3.nest()
 dataGroup.forEach(function(d,i) {
 
 var ocean = svg.selectAll( "path" )
+
   .data(topojson.object(oceans, oceans.objects.countries)
   .geometries)
     .enter()
@@ -289,7 +237,7 @@ var buttons = d3.select("#buttons").selectAll("button")
     .text(function(d){return d.key;})
     .on ("mouseover", mouseOver);
 
-var voyageData = d3.select("#mapdata").selectAll(".voyageData")
+var voyageData = d3.select("#map").select("#mapdata").selectAll(".voyageData")
       .data(dataGroup)
       .enter()
       .append("div")
@@ -321,7 +269,6 @@ var voyageData = d3.select("#mapdata").selectAll(".voyageData")
       .style("opacity", 0.2)
       .on ("mouseover", mouseOver);
 
-
   var paths = voyageGroups.selectAll(".journey")
       .data(function(d){return d.values})
       .enter()
@@ -331,6 +278,7 @@ var voyageData = d3.select("#mapdata").selectAll(".voyageData")
       .attr("id", function(d){return "path_" + d.key})
       .attr("fill", "none")
       .attr("stroke", function(d){ return color(d.key)})
+      .attr("opacity",0)
 
   var voyageMarker = voyageGroups.selectAll(".voyageMarker")
      .data(function(d){ return d.values})
@@ -370,6 +318,7 @@ var voyageData = d3.select("#mapdata").selectAll(".voyageData")
      .style("stroke-width","15px")
 
      .on("mouseover", function(d) {
+
        tooltip.transition()
            .duration(200)
            .style("opacity", 1)
@@ -377,6 +326,9 @@ var voyageData = d3.select("#mapdata").selectAll(".voyageData")
            .style('left',(d3.event.pageX + 10) + 'px')
            .style('top', (d3.event.pageY + 10) + 'px')
        })
+      .on("mouseout", function(d){
+        d3.select(this).attr("r",5)
+      })
 
 
   //button - click to start animation
@@ -395,29 +347,27 @@ var voyageData = d3.select("#mapdata").selectAll(".voyageData")
 
   function clickButton(d,i) {
 
-   if (runningAnimation) { stopAnimation(runningAnimation.animation, runningAnimation.voyageID); }//if this is commented out then each animation will show on screen
+   if (runningAnimation) { stopAnimation(runningAnimation.animation, runningAnimation.voyageID); }
 
     var voyageClass = d.key;
 
     var voyageID = d.values[0].key;
 
-    var col = function(d) {return d.color = color(d.key);}
-    console.log(color);
-
     //animate place name and dates
       var j = 0;
       var animation = setInterval(function(){
+
         d3.select("#mapdata").style("opacity", 1);
 
         d3.select("#data_"+ voyageID)
-       .html(function(d) { return "<h2>" + d.values[j].voyageType + "</h1><p><span style ='color:red;font-size: 16px; font-weight:bold;'>" + d.values[j].arrivalDate + "<br/>" + d.values[j].placeName; + "</span></p>"});
+       .html(function(d) { return "<h2>" + d.values[j].voyageType + "</h2><p><span style ='color:red;font-size: 18px; font-weight:bold;'>" + d.values[j].arrivalDate + "<br/>" + d.values[j].placeName; + "</span></p>"});
 
         j = j + 1;
 
         if(j==d.values[0].values.length) { stopAnimation(animation, voyageID); }
-      },1000);
+        },1000);
 
-      runningAnimation = { animation: animation, voyageID: voyageID };
+        runningAnimation = { animation: animation, voyageID: voyageID };
 
   //add image
   d3.select("#images_" + voyageID)
@@ -425,7 +375,6 @@ var voyageData = d3.select("#mapdata").selectAll(".voyageData")
     .attr("href", function(d){return d.values[j].groupURL })
     .append("img")
     .attr("src", function(d){return "images/" +d.values[j].groupPic })
-
 
   //style voyage line and circles
   d3.select(".voyage_" + voyageClass).style("opacity", 1.0)
@@ -451,6 +400,7 @@ var voyageData = d3.select("#mapdata").selectAll(".voyageData")
     .ease(d3.easeLinear)
     .duration(9500)
     .attr("stroke-dashoffset", 0)
+    .attr("opacity",1)
   }
 
   //Mouseover voyage groups to show related button color
@@ -459,8 +409,7 @@ var voyageData = d3.select("#mapdata").selectAll(".voyageData")
       var voyageID = d.values[0].key;
 
       d3.select("#button_" + voyageClass).style("background-color", function(d){ return color(voyageID)})
-      d3.select("#group_" + voyageClass).style("opacity", 1) // maybe get rid of this?
-
+      d3.select("#group_" + voyageClass).style("opacity", 1)
 
   }
 
@@ -470,7 +419,6 @@ var voyageData = d3.select("#mapdata").selectAll(".voyageData")
      .ease(d3.easeLinear)
      .duration(5000)
      .attrTween("transform", createPathTween)
-
 
      paths.transition()
      .attr("stroke-dasharray", function() {
@@ -502,7 +450,7 @@ var voyageData = d3.select("#mapdata").selectAll(".voyageData")
         };
       }
     });
-  //});//
+
   }
 
   //resize
