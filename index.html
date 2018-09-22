@@ -35,11 +35,9 @@
   fill: none;
   stroke-width: 2;
   }
-	  
 .place{
   opacity: 0.5;
 }
-	  
 .place:hover{
   fill: #00FF40;
   r:10;
@@ -83,8 +81,7 @@
 
 
 #header{
-    /*background-color: orange;*/
-	background-color: hotpink;
+    background-color: orange;
     color: #ffffff;
     width:100%;
     margin-left:15px;
@@ -103,10 +100,14 @@
 #voyageDesc
   {
     position: absolute;
+    /*background-color: hotpink;*/
     right: 0;
     top: 0;
     width:25%;
     height: 200px;
+  }
+  #voyageDesc p{
+    width:90%;
   }
 
 #mapdata
@@ -143,7 +144,10 @@
       position:relative;
       top:20px;
     }
-
+    
+    #voyageDesc p{
+      width:90%;
+    }
 
   #mapdata{
       width:100%;
@@ -474,7 +478,7 @@ function mouseover(d,i) {
     runningchange = { change: change, voyageID: voyageID };
 
   d3.select("#desc_"+ voyageID)
-    .html(function(d) { return "<h2>" + d.values[j].voyageType + "</h2><p><span style ='color:orange;font-size: 18px; font-weight:bold;'>" + d.values[j].arrivalDate + "<br/>" + d.values[j].placeName; + "</span></p>"});
+    .html(function(d) { return "<h3>" + d.values[j].voyageType + "</h3><p><span style ='color:orange;font-size: 18px; font-weight:bold;'>" + d.values[j].period +"<br/>" + d.values[j].voyageName + "</span><br/>" + d.values[j].voyageDesc; + "</p>"});
 
     d3.select("#images_" + voyageID)
         .append("a")
