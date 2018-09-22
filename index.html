@@ -28,7 +28,7 @@
 
   img{
     border-radius: 3px;
-    width:80%;
+    width:90%;
   }
 
 .journey {
@@ -79,7 +79,8 @@
 
 
 #header{
-    background-color: orange;
+    /*background-color: orange;*/
+	background-color: hotpink;
     color: #ffffff;
     width:100%;
     margin-left:15px;
@@ -98,7 +99,6 @@
 #voyageDesc
   {
     position: absolute;
-    /*background-color: hotpink;*/
     right: 0;
     top: 0;
     width:25%;
@@ -226,7 +226,7 @@ var description = d3.select("body").append("div")
 d3.queue()
   .defer(d3.json, "data/world110m.json")
   //.defer(d3.csv, "data/voyageData.csv")
-   .defer(d3.csv, "data/multipleVoyages.csv")
+ .defer(d3.csv, "data/multipleVoyages.csv")
   .await(ready);
 
 function ready (error, oceans, data){
