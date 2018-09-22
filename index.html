@@ -144,7 +144,7 @@
       position:relative;
       top:20px;
     }
-    
+
     #voyageDesc p{
       width:90%;
     }
@@ -233,8 +233,8 @@ var description = d3.select("body").append("div")
 
 d3.queue()
   .defer(d3.json, "data/world110m.json")
-  //.defer(d3.csv, "data/voyageData.csv")
- .defer(d3.csv, "data/multipleVoyages.csv")
+  .defer(d3.csv, "data/voyageData.csv")
+ //.defer(d3.csv, "data/multipleVoyages.csv")
   .await(ready);
 
 function ready (error, oceans, data){
@@ -477,8 +477,9 @@ function mouseover(d,i) {
 
     runningchange = { change: change, voyageID: voyageID };
 
-  d3.select("#desc_"+ voyageID)
-    .html(function(d) { return "<h3>" + d.values[j].voyageType + "</h3><p><span style ='color:orange;font-size: 18px; font-weight:bold;'>" + d.values[j].period +"<br/>" + d.values[j].voyageName + "</span><br/>" + d.values[j].voyageDesc; + "</p>"});
+
+    d3.select("#desc_"+ voyageID)
+      .html(function(d) { return "<h3>" + d.values[j].voyageType + "</h3><p><span style ='color:hotpink;font-size: 18px; font-weight:bold;'>" + d.values[j].period +"</span><br/><span style ='color:orange;font-size: 18px; font-weight:bold;'>" + d.values[j].voyageName + "</span></p><br/>" +"<p>" + d.values[j].voyageDesc; + "</p>"});
 
     d3.select("#images_" + voyageID)
         .append("a")
