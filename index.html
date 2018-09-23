@@ -186,7 +186,11 @@ h3{
     }
 }
 
-@media only screen and (max-width: 600px) and (orientation:landscape){
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) { 
 h1{
   font-size: 28px;
 }
@@ -196,7 +200,7 @@ h3{
 }
 
 #header{
-    background-color: hotpink;
+    background-color: #FE2EC8;
     color: #ffffff;
     width:100%;
     margin-left:15px;
