@@ -136,7 +136,7 @@ h3{
 }
 
 #header{
-    background-color: orange;
+    background-color: #FE2EC8;
     color: #ffffff;
     width:100%;
     margin-left:15px;
@@ -186,11 +186,8 @@ h3{
     }
 }
 
-@media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 667px) 
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: landscape) { 
+
+@media only screen and (max-width: 600px) and (orientation:landscape){
 h1{
   font-size: 28px;
 }
@@ -200,55 +197,20 @@ h3{
 }
 
 #header{
-    background-color: #FE2EC8;
+    background-color: hotpink;
     color: #ffffff;
     width:100%;
     margin-left:15px;
     margin-right: 15px;
     padding: 5px;
 }
-#map
-  {
-    position: absolute;
-    width:100%;
-    height: 300px;
-    margin-left:15px;
-    margin-right: 15px;
-  }
 
 #voyageDesc{
     width:50%;
     /*height: 250px;*/
 
-    position:relative;
-    top:20px;
   }
 
-  #voyageDesc p{
-    width:90%;
-  }
-
-#mapdata{
-    width:100%;
-    height: 250px;
-    position:absolute;
-    right:0;
-    top:0;
-
-  }
-
-#buttons {
-    width:100%;
-    height:40px;
-    margin-left:15px;
-    margin-right: 15px;
-    position:relative;
-    top:150px;
-  }
-
-  .place:hover{
-  r:20;
-  }
 }
 </style>
 </head>
