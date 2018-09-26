@@ -78,9 +78,22 @@ img{
   display: none;
 }
 
+/*
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+  h1{
+    font-size: 28px;
+  }
+
+  h3{
+    font-size: 24px;
+  }
 
 #header{
-    background-color: orange;
+    background-color: #FE9A2E;
     color: #ffffff;
     width:100%;
     margin-left:15px;
@@ -111,7 +124,6 @@ img{
 #mapdata
   {
     position: absolute;
-    /*right: 0;*/
     left: 0;
     top: 0;
     width:25%;
@@ -124,94 +136,273 @@ img{
     margin-left:15px;
     margin-right: 15px;
   }
-
-  @media only screen and (max-width: 600px) and (orientation:portrait){
-
-h1{
-  font-size: 28px;
 }
 
-h3{
-  font-size: 24px;
-}
+/*
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
 
-#header{
-    background-color: #FF8000;  
-    color: #ffffff;
-    width:100%;
-    margin-left:15px;
-    margin-right: 15px;
-    padding: 5px;
-}
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+  h1{
+    font-size: 28px;
+  }
+
+  h3{
+    font-size: 24px;
+  }
+
+  #header{
+      background-color: #2EFE64;
+      color: #ffffff;
+      width:100%;
+      margin-left:15px;
+      margin-right: 15px;
+      padding: 10px;
+  }
   #map
     {
-      position: absolute;
+      position: relative;
+      display: inline-block;
       width:100%;
-      height: 600px;
       margin-left:15px;
       margin-right: 15px;
     }
 
-  #voyageDesc{
-      width:100%;
-      height: 250px;
-      position:relative;
-      top:20px;
+  #voyageDesc
+    {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width:25%;
+      height: 200px;
     }
-
     #voyageDesc p{
       width:90%;
     }
 
-  #mapdata{
-      width:100%;
-      height: 250px;
-      position:absolute;
-      right:0;
-      top:0;
-
+  #mapdata
+    {
+      position: absolute;
+      /*right: 0;*/
+      left: 0;
+      top: 0;
+      width:25%;
+      height: 200px;
     }
 
-  #buttons {
+    #buttons {
       width:100%;
-      height:40px;
+      height:80px;
       margin-left:15px;
       margin-right: 15px;
-      position:relative;
-      top:150px; /* was 150*/
     }
 
-    .place:hover{
-    r:20;
-    }
 }
+/*
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
 
-
-@media only screen and (max-width: 600px) and (orientation:landscape){
-h1{
-  font-size: 28px;
-}
-
-h3{
-  font-size: 24px;
-}
-
-#header{
-    background-color: orange;
-    color: #ffffff;
-    width:100%;
-    margin-left:15px;
-    margin-right: 15px;
-    padding: 5px;
-}
-
-#voyageDesc{
-    width:50%;
-    /*height: 250px;*/
-
+@media (min-width: 768px) and (max-width: 1024px) {
+  h1{
+    font-size: 28px;
   }
 
+  h3{
+    font-size: 24px;
+  }
+
+  #header{
+      background-color: #8000FF;
+      color: #ffffff;
+      width:100%;
+      margin-left:15px;
+      margin-right: 15px;
+      padding: 10px;
+  }
+  #map
+    {
+      position: relative;
+      display: inline-block;
+      width:100%;
+      margin-left:15px;
+      margin-right: 15px;
+    }
+
+  #voyageDesc
+    {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width:33%;
+      height: 200px;
+    }
+    #voyageDesc p{
+      width:90%;
+    }
+
+  #mapdata
+    {
+      position: absolute;
+      /*right: 0;*/
+      left: 0;
+      top: 0;
+      width:25%;
+      height: 200px;
+    }
+
+    #buttons {
+      width:100%;
+      height:80px;
+      margin-left:15px;
+      margin-right: 15px;
+    }
+
 }
+/*
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+  h1{
+    font-size: 28px;
+  }
+
+  h3{
+    font-size: 24px;
+  }
+
+
+  #header{
+      background-color: hotpink;
+      color: #ffffff;
+      width:100%;
+      margin-left:15px;
+      margin-right: 15px;
+      padding: 5px;
+  }
+    #map
+      {
+        position: absolute;
+        width:100%;
+        height: 600px;
+        margin-left:15px;
+        margin-right: 15px;
+      }
+
+    #voyageDesc{
+        width:100%;
+        height: 250px;
+        position:relative;
+        top:20px;
+      }
+
+      #voyageDesc p{
+        width:50%;
+        display: block;
+        float:left;
+
+      }
+      #voyageDesc img{
+        width:40%;
+        display: block;
+        float:right;
+
+      }
+
+    #mapdata{
+        width:100%;
+        height: 250px;
+        position:absolute;
+        right:0;
+        top:0;
+
+      }
+
+    #buttons {
+        width:100%;
+        height:40px;
+        margin-left:15px;
+        margin-right: 15px;
+        position:relative;
+        top:280px; /* was 150*/
+      }
+
+      .place:hover{
+      r:20;
+      }
+
+}
+/*
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+  h1{
+    font-size: 28px;
+  }
+
+  h3{
+    font-size: 24px;
+  }
+
+  #header{
+      background-color:#FE642E;
+      color: #ffffff;
+      width:100%;
+      margin-left:15px;
+      margin-right: 15px;
+      padding: 5px;
+  }
+    #map
+      {
+        position: absolute;
+        width:100%;
+        height: 600px;
+        margin-left:15px;
+        margin-right: 15px;
+      }
+
+    #voyageDesc{
+        width:100%;
+        height: 250px;
+        position:relative;
+        top:20px;
+      }
+
+      #voyageDesc p{
+        width:90%;
+      }
+
+    #mapdata{
+        width:100%;
+        height: 250px;
+        position:absolute;
+        right:0;
+        top:0;
+
+      }
+
+    #buttons {
+        width:100%;
+        height:40px;
+        margin-left:15px;
+        margin-right: 15px;
+        position:relative;
+        top:150px; /* was 150*/
+      }
+
+      .place:hover{
+      r:20;
+      }
+}
+
+
 </style>
 </head>
 
@@ -521,8 +712,8 @@ function mouseover(d,i) {
     runningchange = { change: change, voyageID: voyageID };
 
 
-    d3.select("#desc_"+ voyageID)
-      .html(function(d) { return "<h3>" + d.values[j].voyageType + "</h3><p><span style ='color:hotpink;font-size: 18px; font-weight:bold;'>" + d.values[j].period +"</span><br/><span style ='color:orange;font-size: 18px; font-weight:bold;'>" + d.values[j].voyageName + "</span></p><br/>" +"<p>" + d.values[j].voyageDesc; + "</p>"});
+d3.select("#desc_"+ voyageID)
+  .html(function(d) { return "<h3>" + d.values[j].voyageType + "</h3><h4><span style ='color:hotpink;font-size: 18px; font-weight:bold;'>" + d.values[j].period +"</span><br/><span style ='color:orange;font-size: 18px; font-weight:bold;'>" + d.values[j].voyageName + "</span></h4><br/>" +"<p>" + d.values[j].voyageDesc; + "</p>"});
 
     d3.select("#images_" + voyageID)
         .append("a")
