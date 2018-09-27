@@ -572,7 +572,9 @@ var voyageMarker = voyageGroups.selectAll(".voyageMarker")
    })
    .attr("r", 9)
    .style("fill", function(d){ return color(d.key)})
-   .attr("transform", "translate(-100,-100)");
+   .attr("transform", "translate(-100,-100)")
+.attr("width", 30) //need both width and height for this png to show up in Safari and Firefox
+.attr("height", 30);
   // .attr("transform", "translate(0,0)"); // puts circle in top left corner
 
 var placeGroups = voyageGroups.selectAll(".placeVisited")
