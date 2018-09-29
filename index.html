@@ -20,11 +20,10 @@
   }
 
   svg {
- /* display: block;*/
+  display: block;
   margin: auto;
   background-color: #EAECEE;
-display:inline;
-    overflow:hidden;
+  overflow:hidden; /*see if this helps with IE issue*/
   }
 
 img{
@@ -130,6 +129,7 @@ img{
     top: 0;
     width:25%;
     height: 200px;
+    padding:10px;
   }
 
   #buttons {
@@ -177,11 +177,14 @@ img{
       position: absolute;
       right: 0;
       top: 0;
-      width:25%;
+      width:30%;
       height: 200px;
     }
     #voyageDesc p{
       width:90%;
+    }
+    #voyageDesc img{
+      width:80%;
     }
 
   #mapdata
@@ -192,6 +195,7 @@ img{
       top: 0;
       width:25%;
       height: 200px;
+      padding:10px;
     }
 
     #buttons {
@@ -253,6 +257,7 @@ img{
       top: 0;
       width:25%;
       height: 200px;
+      padding:10px;
     }
 
     #buttons {
@@ -276,8 +281,8 @@ img{
 
   h3{
     font-size: 24px;
+    line-height: 25px;
   }
-
 
   #header{
       background-color: hotpink;
@@ -287,56 +292,49 @@ img{
       margin-right: 15px;
       padding: 5px;
   }
-    #map
-      {
-        position: absolute;
-        width:100%;
-        height: 600px;
-        margin-left:15px;
-        margin-right: 15px;
-      }
+  #map
+    {
+      position: absolute;
+      width:100%;
+      height: 600px;
+      margin-left:15px;
+      margin-right: 15px;
+    }
 
-    #voyageDesc{
-        width:100%;
-        height: 250px;
-        position:relative;
-        top:20px;
-      }
+  #voyageDesc{
+      width:100%;
+      height: 250px;
+      position:relative;
+      top:20px;
+    }
 
-      #voyageDesc p{
-        width:50%;
-        display: block;
-        float:left;
+    #voyageDesc p{
+      width:90%;
+    }
 
-      }
-      #voyageDesc img{
-        width:40%;
-        display: block;
-        float:right;
+  #mapdata{
+      width:100%;
+      height: 250px;
+      position:absolute;
+      right:0;
+      top:0;
+      /*padding:5px;*/
 
-      }
+    }
 
-    #mapdata{
-        width:100%;
-        height: 250px;
-        position:absolute;
-        right:0;
-        top:0;
+  #buttons {
+      width:100%;
+      height:40px;
+      margin-left:15px;
+      margin-right: 15px;
+      position:relative;
+      top:210px;
+    }
 
-      }
+    .place:hover{
+    r:20;
+    }
 
-    #buttons {
-        width:100%;
-        height:40px;
-        margin-left:15px;
-        margin-right: 15px;
-        position:relative;
-        top:280px; /* was 150*/
-      }
-
-      .place:hover{
-      r:20;
-      }
 
 }
 /*
@@ -351,6 +349,7 @@ img{
 
   h3{
     font-size: 24px;
+    line-height: 25px;
   }
 
   #header{
@@ -387,6 +386,7 @@ img{
         position:absolute;
         right:0;
         top:0;
+        /*padding:5px;*/
 
       }
 
@@ -404,7 +404,11 @@ img{
       }
 }
 
-
+/*Things to do:
+reduce css if possible
+check out why some lines show up when moused over but not totalLengthadd this feature back in and also the highlight button one when line moused overflow
+Check what is wrong with IE version
+*/
 </style>
 </head>
 
@@ -428,7 +432,7 @@ img{
 
 var mapWidth = $("#map").width(),
     width = 1300,
-    height = 500; // was 500
+    height = 500;
 
 
 var svg = d3.select("#svg").append("svg")
@@ -460,13 +464,12 @@ var color = d3.scaleOrdinal()
 var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
 
-var description = d3.select("body").append("div")
-      .attr("class", "description")
+/*removed var description from here - did I need it??*/
 
 
 d3.queue()
   .defer(d3.json, "data/world110m.json")
-  //.defer(d3.csv, "data/voyageData.csv")
+ // .defer(d3.csv, "data/voyageData.csv")
  .defer(d3.csv, "data/multipleVoyages.csv")
   .await(ready);
 
@@ -559,7 +562,10 @@ var paths = voyageGroups.selectAll(".journey")
     .attr("opacity",0)
     .on("mouseover", function(d,i) {
       d3.select(this)
-        .style("opacity", 1)
+      var xxx = d3.select(this).attr("id")
+      console.log(xxx)
+        //.style("opacity", 1)
+        //  d3.select("#button_" + voyageClass).style("background-color", function(d){ return color(voyageID)})
       })
 
 var voyageMarker = voyageGroups.selectAll(".voyageMarker")
@@ -572,10 +578,7 @@ var voyageMarker = voyageGroups.selectAll(".voyageMarker")
    })
    .attr("r", 9)
    .style("fill", function(d){ return color(d.key)})
-   .attr("transform", "translate(-100,-100)")
-.attr("width", 30) //need both width and height for this png to show up in Safari and Firefox
-.attr("height", 30);
-  // .attr("transform", "translate(0,0)"); // puts circle in top left corner
+   .attr("transform", "translate(-100,-100)");
 
 var placeGroups = voyageGroups.selectAll(".placeVisited")
     .data(function(d) {return d.values;})
@@ -717,13 +720,16 @@ function mouseover(d,i) {
 
 
 d3.select("#desc_"+ voyageID)
-  .html(function(d) { return "<h3>" + d.values[j].voyageType + "</h3><h4><span style ='color:hotpink;font-size: 18px; font-weight:bold;'>" + d.values[j].period +"</span><br/><span style ='color:orange;font-size: 18px; font-weight:bold;'>" + d.values[j].voyageName + "</span></h4><br/>" +"<p>" + d.values[j].voyageDesc; + "</p>"});
+  .html(function(d) { return "<h3>" + d.values[j].voyageType + "</h3><h4><span style ='color:hotpink;font-size: 18px; font-weight:bold;'>" + d.values[j].period +"</span><br/><span style ='color:orange;font-size: 18px; font-weight:bold;'>" + d.values[j].voyageName + "</span></h4><p>" + d.values[j].voyageDesc; + "</p>"});
 
     d3.select("#images_" + voyageID)
         .append("a")
         .attr("href", function(d){return d.values[j].groupURL })
         .append("img")
         .attr("src", function(d){return "images/" +d.values[j].groupPic });
+
+      //  d3.select("#button_" + voyageClass).style("background-color", function(d){ return color(voyageID)})
+      //  d3.select("#group_" + voyageClass).style("opacity", 1) // maybe get rid of this?
 }
 
 
