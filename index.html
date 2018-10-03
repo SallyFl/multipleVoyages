@@ -35,13 +35,20 @@ img{
   fill: none;
   stroke-width: 2;
   }
-.place{
-  opacity: 0.5;
-}
-.place:hover{
-  fill: #00FF40;
+
+[class*="place_"] {
+      opacity: 0.5;
+      r: 5;
+      stroke:transparent;
+      stroke-width:15px;
+  }
+
+[class*="place_"]:hover {
+   fill: #00FF40;
   r:10;
 }
+
+
 .dateText{
   font-size: 20px;
   fill: #6E6E6E;
@@ -79,6 +86,14 @@ img{
   display: none;
 }
 
+#header{
+    background-color: orange;
+    color: #ffffff;
+    width:100%;
+    margin-left:15px;
+    margin-right: 15px;
+    padding: 10px;
+}
 /*
   ##Device = Desktops
   ##Screen = 1281px to higher resolution desktops
@@ -93,14 +108,7 @@ img{
     font-size: 24px;
   }
 
-#header{
-    background-color: #FE9A2E;
-    color: #ffffff;
-    width:100%;
-    margin-left:15px;
-    margin-right: 15px;
-    padding: 10px;
-}
+
 #map
   {
     position: relative;
@@ -155,14 +163,7 @@ img{
     font-size: 24px;
   }
 
-  #header{
-      background-color: #2EFE64;
-      color: #ffffff;
-      width:100%;
-      margin-left:15px;
-      margin-right: 15px;
-      padding: 10px;
-  }
+
   #map
     {
       position: relative;
@@ -220,14 +221,6 @@ img{
     font-size: 24px;
   }
 
-  #header{
-      background-color: #8000FF;
-      color: #ffffff;
-      width:100%;
-      margin-left:15px;
-      margin-right: 15px;
-      padding: 10px;
-  }
   #map
     {
       position: relative;
@@ -284,14 +277,6 @@ img{
     line-height: 25px;
   }
 
-  #header{
-      background-color: hotpink;
-      color: #ffffff;
-      width:100%;
-      margin-left:15px;
-      margin-right: 15px;
-      padding: 5px;
-  }
   #map
     {
       position: absolute;
@@ -352,14 +337,7 @@ img{
     line-height: 25px;
   }
 
-  #header{
-      background-color:#FE642E;
-      color: #ffffff;
-      width:100%;
-      margin-left:15px;
-      margin-right: 15px;
-      padding: 5px;
-  }
+
     #map
       {
         position: absolute;
@@ -404,11 +382,7 @@ img{
       }
 }
 
-/*Things to do:
-reduce css if possible
-check out why some lines show up when moused over but not totalLengthadd this feature back in and also the highlight button one when line moused overflow
-Check what is wrong with IE version
-*/
+
 </style>
 </head>
 
@@ -457,19 +431,18 @@ var voyageLine = d3.line()
 
 
 var color = d3.scaleOrdinal()
-  .range(["#084B8A", "#FE642E" , "#FE2EC8","#81BEF7"]);
+  .range(["#2EFE64", "#FE642E" , "#FE2EC8","#81BEF7"]);
 
 
 //tooltip for mouseover
 var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
 
-/*removed var description from here - did I need it??*/
 
 
 d3.queue()
   .defer(d3.json, "data/world110m.json")
- // .defer(d3.csv, "data/voyageData.csv")
+ //.defer(d3.csv, "data/voyageData.csv")
  .defer(d3.csv, "data/multipleVoyages.csv")
   .await(ready);
 
@@ -485,7 +458,6 @@ var dataGroup = d3.nest()
 dataGroup.forEach(function(d,i) {
 
 var ocean = svg.selectAll( "path" )
-
 .data(topojson.object(oceans, oceans.objects.countries)
 .geometries)
   .enter()
@@ -547,7 +519,7 @@ var voyageGroups = svg.selectAll(".voyageGroup")
     .attr("class", function(d){return "voyageGroup voyage_" + d.key})
     .attr("datagroup", function(d){return d.key})
     .attr("id", function(d){return "group_" + d.key})
-    .style("opacity", 0.6)
+    .on ("mouseover", mouseover);
 
 
 var paths = voyageGroups.selectAll(".journey")
@@ -560,13 +532,7 @@ var paths = voyageGroups.selectAll(".journey")
     .attr("fill", "none")
     .attr("stroke", function(d){ return color(d.key)})
     .attr("opacity",0)
-    .on("mouseover", function(d,i) {
-      d3.select(this)
-      var xxx = d3.select(this).attr("id")
-      console.log(xxx)
-        //.style("opacity", 1)
-        //  d3.select("#button_" + voyageClass).style("background-color", function(d){ return color(voyageID)})
-      })
+
 
 var voyageMarker = voyageGroups.selectAll(".voyageMarker")
    .data(function(d){ return d.values})
@@ -592,7 +558,7 @@ var placeVisited = placeGroups.selectAll("placeVisited")
    .data(function(d) {return d.values;})
    .enter()
    .append("circle")
-   .attr("class","place")
+   .attr("class", function(d,i){return "place_" + d.voyageID})
    .attr("cx", function(d, i) {
      return projection([d.lon, d.lat])[0];
    })
@@ -600,14 +566,14 @@ var placeVisited = placeGroups.selectAll("placeVisited")
      return projection([d.lon, d.lat])[1];
 
    })
-   .attr("r", 5)
-   .style("stroke","transparent")
-   .style("stroke-width","15px")
+  // .attr("r", 5)
+  // .style("stroke","transparent")
+  // .style("stroke-width","15px")
 
    .on("mouseover", function(d) {
      tooltip.transition()
          .duration(200)
-         .style("opacity", 1)
+      .style("opacity", 1)
      tooltip.html( d.placeName + "<br/>"+ d.arrivalDate + "</p>")
          .style('left',(d3.event.pageX + 10) + 'px')
          .style('top', (d3.event.pageY + 10) + 'px')
@@ -621,6 +587,8 @@ var placeVisited = placeGroups.selectAll("placeVisited")
 
   //button - click to start animation
   buttons.on("click", clickButton);
+  //mouse over buttons to get voyage data and image
+  buttons.on("mouseover", mouseover);
 
   var runningAnimation = null;
 
@@ -630,8 +598,8 @@ var placeVisited = placeGroups.selectAll("placeVisited")
     d3.select("#data_"+ voyageID).text("");
     d3.select("#mapdata").style("opacity", 0);
     d3.select("#path_" + voyageID).style("opacity", 0);
-    d3.select("#placeVisited_" + voyageID).style("opacity", 0);
-  //  d3.select("#group_" + voyageClass).style("opacity", 0)
+    //d3.select("#placeVisited_" + voyageID).style("opacity", 0); // doesnt seem to do anything
+    d3.selectAll(".place_" + voyageID).style("opacity", 0.5)
     runningAnimation = null;
   }
 
@@ -640,6 +608,10 @@ function clickButton(d,i) {
 
   var voyageClass = d.key;
   var voyageID = d.values[0].key;
+  console.log(voyageID)
+
+  //style voyage line and circles
+  d3.selectAll(".place_" + voyageID).style("opacity", 1)
 
  if (runningAnimation) { stopAnimation(runningAnimation.animation, runningAnimation.voyageID); }
 
@@ -659,37 +631,33 @@ function clickButton(d,i) {
 
       runningAnimation = { animation: animation, voyageID: voyageID };
 
-//style voyage line and circles
-    d3.select(".voyage_" + voyageClass).style("opacity", 1.0)
+//animate circle marker
+d3.select("circle#Marker_"+ voyageID)
+    .transition()
+    .ease(d3.easeLinear)
+    .duration(9500)
+    .attrTween("transform", createPathTween);
 
-    //animate circle marker
-    d3.select("circle#Marker_"+ voyageID)
-      .transition()
-      .ease(d3.easeLinear)
-      .duration(9500)
-      .attrTween("transform", createPathTween);
+//animate voyage path line
+d3.select("#path_" + voyageID)
+  .attr("stroke-dasharray", function() {
+    var totalLength = this.getTotalLength();
+    return totalLength + " " + totalLength;
+  })
+  .attr("stroke-dashoffset", function() {
+    var totalLength = this.getTotalLength();
+    return totalLength;
+  })
+  .transition()
+  .ease(d3.easeLinear)
+  .duration(9500)
+  .attr("stroke-dashoffset", 0)
+  .attr("opacity",1)
+}
 
-    //animate voyage path line
-    d3.select("#path_" + voyageID)
-      .attr("stroke-dasharray", function() {
-        var totalLength = this.getTotalLength();
-        return totalLength + " " + totalLength;
-      })
-      .attr("stroke-dashoffset", function() {
-        var totalLength = this.getTotalLength();
-        return totalLength;
-      })
-      .transition()
-      .ease(d3.easeLinear)
-      .duration(9500)
-      .attr("stroke-dashoffset", 0)
-      .attr("opacity",1)
-    }
 
-//mouse over buttons to get voyage data and image
-buttons.on("mouseover", mouseover);
+//Show voyage description and image on mouseover
 var runningchange = null;
-
 function stopchange(change, voyageID) {
 
   d3.select("#desc_"+ voyageID).text("");
@@ -698,17 +666,17 @@ function stopchange(change, voyageID) {
 }
 
 function mouseover(d,i) {
-
   if (runningchange) { stopchange(runningchange.change, runningchange.voyageID); }
 
   var voyageClass = d.key;
   var voyageID = d.values[0].key;
 
+  //mouseover voyage group and make button color same
   d3.select("#button_" + voyageClass).style("background-color", function(d){ return color(voyageID)})
-  d3.select("#group_" + voyageClass).style("opacity", 1) // maybe get rid of this?
+
+  d3.select("#group_" + voyageClass).style("opacity", 1)
 
   var j = 0;
-
   var change = (function(){
 
     j = j + 1;
@@ -718,20 +686,15 @@ function mouseover(d,i) {
 
     runningchange = { change: change, voyageID: voyageID };
 
-
 d3.select("#desc_"+ voyageID)
   .html(function(d) { return "<h3>" + d.values[j].voyageType + "</h3><h4><span style ='color:hotpink;font-size: 18px; font-weight:bold;'>" + d.values[j].period +"</span><br/><span style ='color:orange;font-size: 18px; font-weight:bold;'>" + d.values[j].voyageName + "</span></h4><p>" + d.values[j].voyageDesc; + "</p>"});
 
-    d3.select("#images_" + voyageID)
-        .append("a")
-        .attr("href", function(d){return d.values[j].groupURL })
-        .append("img")
-        .attr("src", function(d){return "images/" +d.values[j].groupPic });
-
-      //  d3.select("#button_" + voyageClass).style("background-color", function(d){ return color(voyageID)})
-      //  d3.select("#group_" + voyageClass).style("opacity", 1) // maybe get rid of this?
+d3.select("#images_" + voyageID)
+  .append("a")
+  .attr("href", function(d){return d.values[j].groupURL })
+  .append("img")
+  .attr("src", function(d){return "images/" +d.values[j].groupPic });
 }
-
 
 //animate all voyages on opening page
 function transition(){
@@ -786,3 +749,4 @@ $(window).resize(function() {
   </body>
 
   </html>
+
