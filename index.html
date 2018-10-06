@@ -9,6 +9,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif" rel="stylesheet">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -73,6 +74,7 @@ img{
 }
 
 #header{
+    font-family: 'IBM Plex Serif', serif;
     background-color: #FE642E;
     color: #ffffff;
     width:100%;
@@ -549,6 +551,7 @@ function transition(){
    .ease(d3.easeLinear)
    .duration(9500)
    .attr("stroke-dashoffset", 0)
+  // .on("end", transition);
 }
 
 transition();
