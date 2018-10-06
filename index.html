@@ -164,6 +164,13 @@ img{
 
 
 @media only screen and (max-width: 400px) and (orientation:portrait){
+  h1{
+    font-size: 28px;
+  }
+
+  h3{
+    font-size: 20px;
+  }
 
   #header{
       background-color: #FE642E;
@@ -193,12 +200,16 @@ img{
     }
     #mapdata
     {
+      font-size:12px;
       position: absolute;
       left: 0;
       top: 0;
-      width:25%;
+      width:33%;
       height: 200px;
-
+    }
+    #mapdata h3{
+      font-size: 16px;
+      font-weight: bold;
     }
 
     #buttons {
@@ -263,8 +274,8 @@ var tooltip = d3.select("body").append("div")
 
 d3.queue()
   .defer(d3.json, "data/world110m.json")
- //.defer(d3.csv, "data/voyageData.csv")
- .defer(d3.csv, "data/multipleVoyages.csv")
+ .defer(d3.csv, "data/voyageData.csv")
+ //.defer(d3.csv, "data/multipleVoyages.csv")
   .await(ready);
 
 function ready (error, oceans, data){
@@ -421,7 +432,6 @@ var placeVisited = placeGroups.selectAll("placeVisited")
     d3.select("#data_"+ voyageID).text("");
     d3.select("#mapdata").style("opacity", 0);
     d3.select("#path_" + voyageID).style("opacity", 0);
-    //d3.select("#placeVisited_" + voyageID).style("opacity", 0); // doesnt seem to do anything
     d3.selectAll(".place_" + voyageID).style("opacity", 0.5)
     runningAnimation = null;
   }
@@ -444,9 +454,8 @@ function clickButton(d,i) {
 
     d3.select("#mapdata").style("opacity", 1);
 
-    d3.select("#data_"+ voyageID)
-     .html(function(d) { return "<h3>" + d.values[j].voyageType + "</h3><p><span style ='font-size: 14px; font-weight:bold;'>" + d.values[j].arrivalDate + "<br/>" + d.values[j].placeName; + "</span></p>"});
-
+d3.select("#data_"+ voyageID)
+ .html(function(d) { return "<h3>" + d.values[j].voyageType + "</h3><p><span style ='font-weight:bold;'>" + d.values[j].arrivalDate + "<br/>" + d.values[j].placeName; + "</span></p>"});
       j = j + 1;
 
       if(j==d.values[0].values.length) { stopAnimation(animation, voyageID); }
