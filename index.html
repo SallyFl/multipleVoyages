@@ -8,14 +8,14 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
 
   body {
-    font-family: 'IBM Plex Serif', serif;
+font-family: 'Montserrat', sans-serif;
     color:#6E6E6E;
   }
 
@@ -23,7 +23,7 @@
   display: block;
   margin: auto;
   background-color: #EAECEE;
-  overflow:hidden; /*see if this helps with IE issue*/
+  overflow:hidden;
   }
 
 img{
@@ -34,6 +34,7 @@ img{
 .journey {
   fill: none;
   stroke-width: 2;
+  opacity: 0.5;
   }
 
 [class*="place_"] {
@@ -48,12 +49,6 @@ img{
   r:10;
 }
 
-
-.dateText{
-  font-size: 20px;
-  fill: #6E6E6E;
-  }
-
 .buttons{
   position: relative;
   background:  #6E6E6E;
@@ -64,15 +59,6 @@ img{
   font-size: 15px;
   text-decoration: none;
   margin-bottom: 10px;
-}
-
-.buttons:hover{
-  background: orange;
-  text-decoration: none;
-}
-
-.buttons:focus{
-  background: orange;;
 }
 
 .tooltip {
@@ -87,57 +73,40 @@ img{
 }
 
 #header{
-    background-color: orange;
+    background-color: #FE642E;
     color: #ffffff;
     width:100%;
     margin-left:15px;
     margin-right: 15px;
-    padding: 10px;
+    padding: 15px;
 }
-/*
-  ##Device = Desktops
-  ##Screen = 1281px to higher resolution desktops
-*/
-
-@media (min-width: 1281px) {
-  h1{
-    font-size: 28px;
-  }
-
-  h3{
-    font-size: 24px;
-  }
-
-
-#map
+  #map
   {
     position: relative;
     display: inline-block;
     width:100%;
     margin-left:15px;
     margin-right: 15px;
+    background-color: orange;
   }
 
-#voyageDesc
-  {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width:25%;
-    height: 200px;
-  }
-  #voyageDesc p{
-    width:90%;
-  }
-
-#mapdata
+  #voyageDesc
   {
     position: absolute;
     left: 0;
     top: 0;
     width:25%;
     height: 200px;
-    padding:10px;
+
+  }
+  #mapdata
+  {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width:25%;
+    height: 200px;
+
   }
 
   #buttons {
@@ -146,240 +115,98 @@ img{
     margin-left:15px;
     margin-right: 15px;
   }
-}
 
-/*
-  ##Device = Laptops, Desktops
-  ##Screen = B/w 1025px to 1280px
-*/
+    @media (min-width: 420px) and (max-width: 767px) {
 
-@media (min-width: 1025px) and (max-width: 1280px) {
-
-  h1{
-    font-size: 28px;
-  }
-
-  h3{
-    font-size: 24px;
-  }
-
-
-  #map
-    {
-      position: relative;
-      display: inline-block;
-      width:100%;
-      margin-left:15px;
-      margin-right: 15px;
+    #header{
+        background-color: hotpink;
+        color: #ffffff;
+        width:100%;
+        margin-left:15px;
+        margin-right: 15px;
     }
+      #map
+      {
+        position: relative;
+        display: inline-block;
+        width:100%;
+        margin-left:15px;
+        margin-right: 15px;
+        background-color: orange;
+      }
 
-  #voyageDesc
-    {
-      position: absolute;
-      right: 0;
-      top: 0;
-      width:30%;
-      height: 200px;
-    }
-    #voyageDesc p{
-      width:90%;
-    }
-    #voyageDesc img{
-      width:80%;
-    }
-
-  #mapdata
-    {
-      position: absolute;
-      /*right: 0;*/
-      left: 0;
-      top: 0;
-      width:25%;
-      height: 200px;
-      padding:10px;
-    }
-
-    #buttons {
-      width:100%;
-      height:80px;
-      margin-left:15px;
-      margin-right: 15px;
-    }
-
-}
-/*
-  ##Device = Tablets, Ipads (portrait)
-  ##Screen = B/w 768px to 1024px
-*/
-
-@media (min-width: 768px) and (max-width: 1024px) {
-  h1{
-    font-size: 28px;
-  }
-
-  h3{
-    font-size: 24px;
-  }
-
-  #map
-    {
-      position: relative;
-      display: inline-block;
-      width:100%;
-      margin-left:15px;
-      margin-right: 15px;
-    }
-
-  #voyageDesc
-    {
-      position: absolute;
-      right: 0;
-      top: 0;
-      width:33%;
-      height: 200px;
-    }
-    #voyageDesc p{
-      width:90%;
-    }
-
-  #mapdata
-    {
-      position: absolute;
-      /*right: 0;*/
-      left: 0;
-      top: 0;
-      width:25%;
-      height: 200px;
-      padding:10px;
-    }
-
-    #buttons {
-      width:100%;
-      height:80px;
-      margin-left:15px;
-      margin-right: 15px;
-    }
-
-}
-/*
-  ##Device = Low Resolution Tablets, Mobiles (Landscape)
-  ##Screen = B/w 481px to 767px
-*/
-
-@media (min-width: 481px) and (max-width: 767px) {
-
-  h1{
-    font-size: 28px;
-  }
-
-  h3{
-    font-size: 24px;
-    line-height: 25px;
-  }
-
-  #map
-    {
-      position: absolute;
-      width:100%;
-      height: 600px;
-      margin-left:15px;
-      margin-right: 15px;
-    }
-
-  #voyageDesc{
-      width:100%;
-      height: 250px;
-      position:relative;
-      top:20px;
-    }
-
-    #voyageDesc p{
-      width:90%;
-    }
-
-  #mapdata{
-      width:100%;
-      height: 250px;
-      position:absolute;
-      right:0;
-      top:0;
-      /*padding:5px;*/
-
-    }
-
-  #buttons {
-      width:100%;
-      height:40px;
-      margin-left:15px;
-      margin-right: 15px;
-      position:relative;
-      top:210px;
-    }
-
-    .place:hover{
-    r:20;
-    }
-
-
-}
-/*
-  ##Device = Most of the Smartphones Mobiles (Portrait)
-  ##Screen = B/w 320px to 479px
-*/
-
-@media (min-width: 320px) and (max-width: 480px) {
-  h1{
-    font-size: 28px;
-  }
-
-  h3{
-    font-size: 24px;
-    line-height: 25px;
-  }
-
-
-    #map
+      #voyageDesc
       {
         position: absolute;
+        left: 0;
+        top: 250px;
         width:100%;
-        height: 600px;
+        height: 200px;
+
+      }
+      #mapdata
+      {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width:25%;
+        height: 200px;
+
+      }
+
+      #buttons {
+        width:100%;
+        height:80px;
         margin-left:15px;
         margin-right: 15px;
       }
+  }
 
-    #voyageDesc{
-        width:100%;
-        height: 250px;
-        position:relative;
-        top:20px;
-      }
 
-      #voyageDesc p{
-        width:90%;
-      }
+@media only screen and (max-width: 400px) and (orientation:portrait){
 
-    #mapdata{
-        width:100%;
-        height: 250px;
-        position:absolute;
-        right:0;
-        top:0;
-        /*padding:5px;*/
+  #header{
+      background-color: #FE642E;
+      color: #ffffff;
+      width:100%;
+      margin-left:15px;
+      margin-right: 15px;
+  }
+    #map
+    {
+      position: relative;
+      display: inline-block;
+      width:100%;
+      margin-left:15px;
+      margin-right: 15px;
+      background-color: orange;
+    }
 
-      }
+    #voyageDesc
+    {
+      position: absolute;
+      left: 0;
+      top: 170px;
+      width:100%;
+      height: 200px;
+
+    }
+    #mapdata
+    {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width:25%;
+      height: 200px;
+
+    }
 
     #buttons {
-        width:100%;
-        height:40px;
-        margin-left:15px;
-        margin-right: 15px;
-        position:relative;
-        top:150px; /* was 150*/
-      }
-
-      .place:hover{
-      r:20;
-      }
+      width:100%;
+      height:80px;
+      margin-left:15px;
+      margin-right: 15px;
+    }
 }
 
 
@@ -387,38 +214,35 @@ img{
 </head>
 
 <body>
-<div id ="container">
+  <!--<div id = "container">-->
 
-  <div id ="header">
-    <h1>Life on the ocean waves</h1>
-  </div>
+      <div id ="header">
+        <h1>Life on the ocean waves</h1>
+      </div>
 
-  <div id = "map">
-    <div id ="svg"></div>
-    <div id ="mapdata"></div>
-    <div id = "voyageDesc"></div>
-  </div>
+    <div id ="map">
 
+        <div id = "mapdata"></div>
+        <div id = "voyageDesc"></div>
+
+    </div>
   <div id = "buttons"></div>
-
-</div>
+<!--</div>-->
 <script>
 
 var mapWidth = $("#map").width(),
     width = 1300,
     height = 500;
 
-
-var svg = d3.select("#svg").append("svg")
+var svg = d3.select("#map").append("svg")
     .attr("preserveAspectRatio", "xMidYMid")
     .attr("viewBox", "0 0 " + width + " " + height)
     .attr("width", mapWidth)
     .attr("height", mapWidth * height / width);
 
 var projection = d3.geoMercator()
-    .center([0, 8 ])
-    .scale(180)
-    .rotate([-150,0])
+    .center([55, 0])
+    .scale(220)
     .translate([width / 2, height / 2])
 
 var geoPath = d3.geoPath()
@@ -433,12 +257,9 @@ var voyageLine = d3.line()
 var color = d3.scaleOrdinal()
   .range(["#2EFE64", "#FE642E" , "#FE2EC8","#81BEF7"]);
 
-
 //tooltip for mouseover
 var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
-
-
 
 d3.queue()
   .defer(d3.json, "data/world110m.json")
@@ -475,7 +296,8 @@ var buttons = d3.select("#buttons").selectAll("button")
     .append("label")
     .text(function(d){return d.key;})
 
-var voyageData = d3.select("#map").select("#mapdata").selectAll(".voyageData")
+var voyageData =
+d3.select("#mapdata").selectAll(".voyageData")
     .data(dataGroup)
     .enter()
     .append("div")
@@ -490,7 +312,8 @@ var data = voyageData.selectAll(".data")
     .attr("class", "data")
     .attr("id", function(d){return "data_" + d.key})
 
-var voyageDesc = d3.select("#map").select("#voyageDesc").selectAll(".voyageDesc")
+var voyageDesc =
+d3.select("#voyageDesc").selectAll(".voyageDesc")
     .data(dataGroup)
     .enter()
     .append("div")
@@ -498,12 +321,14 @@ var voyageDesc = d3.select("#map").select("#voyageDesc").selectAll(".voyageDesc"
     .attr("data-group", function(d){return d.key})
     .attr("id", function(d){return "voyageDesc_" + d.key})
 
+
 var desc = voyageDesc.selectAll(".desc")
     .data(function(d) {return d.values;})
     .enter()
     .append("div")
     .attr("class", "data")
     .attr("id", function(d){return "desc_" + d.key})
+
 
 var images = voyageDesc.selectAll(".images")
     images.data(function(d) {return d.values;})
@@ -566,9 +391,7 @@ var placeVisited = placeGroups.selectAll("placeVisited")
      return projection([d.lon, d.lat])[1];
 
    })
-  // .attr("r", 5)
-  // .style("stroke","transparent")
-  // .style("stroke-width","15px")
+
 
    .on("mouseover", function(d) {
      tooltip.transition()
@@ -686,14 +509,15 @@ function mouseover(d,i) {
 
     runningchange = { change: change, voyageID: voyageID };
 
-d3.select("#desc_"+ voyageID)
-  .html(function(d) { return "<h3>" + d.values[j].voyageType + "</h3><h4><span style ='color:hotpink;font-size: 18px; font-weight:bold;'>" + d.values[j].period +"</span><br/><span style ='color:orange;font-size: 18px; font-weight:bold;'>" + d.values[j].voyageName + "</span></h4><p>" + d.values[j].voyageDesc; + "</p>"});
-
 d3.select("#images_" + voyageID)
   .append("a")
   .attr("href", function(d){return d.values[j].groupURL })
   .append("img")
   .attr("src", function(d){return "images/" +d.values[j].groupPic });
+
+d3.select("#desc_"+ voyageID)
+  .html(function(d) { return "<h3>" + d.values[j].voyageType + "</h3><h4><span style ='color:hotpink;font-size: 18px; font-weight:bold;'>" + d.values[j].period +"</span><br/><span style ='color:orange;font-size: 18px; font-weight:bold;'>" + d.values[j].voyageName + "</span></h4><p>" + d.values[j].voyageDesc; + "</p>"});
+
 }
 
 //animate all voyages on opening page
@@ -749,4 +573,3 @@ $(window).resize(function() {
   </body>
 
   </html>
-
