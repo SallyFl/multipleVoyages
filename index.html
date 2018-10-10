@@ -8,26 +8,26 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif" rel="stylesheet">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
 
-  body {
-font-family: 'Montserrat', sans-serif;
-    color:#6E6E6E;
+body {
+  font-family: 'Montserrat', sans-serif;
+  color:#6E6E6E;
   }
 
-  svg {
+svg {
   display: block;
   margin: auto;
   background-color: #EAECEE;
   overflow:hidden;
   }
 
-img{
+img {
   border-radius: 3px;
   width:90%;
 }
@@ -73,7 +73,7 @@ img{
   display: none;
 }
 
-#header{
+#header {
     font-family: 'IBM Plex Serif', serif;
     background-color: #FE642E;
     color: #ffffff;
@@ -81,6 +81,48 @@ img{
     margin-left:15px;
     margin-right: 15px;
     padding: 15px;
+  }
+
+#map {
+    position: relative;
+    display: inline-block;
+    width:100%;
+    margin-left:15px;
+    margin-right: 15px;
+    background-color: orange;
+  }
+
+#voyageDesc {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width:25%;
+    height: 200px;
+  }
+
+#mapdata {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width:25%;
+    height: 200px;
+  }
+
+  #buttons {
+    width:100%;
+    height:80px;
+    margin-left:15px;
+    margin-right: 15px;
+  }
+
+@media (min-width: 420px) and (max-width: 767px) {
+
+#header{
+    background-color: hotpink;
+    color: #ffffff;
+    width:100%;
+    margin-left:15px;
+    margin-right: 15px;
 }
   #map
   {
@@ -96,73 +138,24 @@ img{
   {
     position: absolute;
     left: 0;
-    top: 0;
-    width:25%;
+    top: 270px;
+    width:100%;
     height: 200px;
 
   }
   #mapdata
   {
     position: absolute;
-    right: 0;
+    left: 0;
     top: 0;
     width:25%;
     height: 200px;
-
   }
-
-  #buttons {
-    width:100%;
-    height:80px;
-    margin-left:15px;
-    margin-right: 15px;
-  }
-
-    @media (min-width: 420px) and (max-width: 767px) {
-
-    #header{
-        background-color: hotpink;
-        color: #ffffff;
-        width:100%;
-        margin-left:15px;
-        margin-right: 15px;
+  #mapdata h3{
+      font-size: 16px;
+      font-weight: bold;
     }
-      #map
-      {
-        position: relative;
-        display: inline-block;
-        width:100%;
-        margin-left:15px;
-        margin-right: 15px;
-        background-color: orange;
-      }
-
-      #voyageDesc
-      {
-        position: absolute;
-        left: 0;
-        top: 270px;
-        width:100%;
-        height: 200px;
-
-      }
-      #mapdata
-      {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width:25%;
-        height: 200px;
-
-      }
-
-      #buttons {
-        width:100%;
-        height:80px;
-        margin-left:15px;
-        margin-right: 15px;
-      }
-  }
+}
 
 
 @media only screen and (max-width: 400px) and (orientation:portrait){
@@ -181,8 +174,7 @@ img{
       margin-left:15px;
       margin-right: 15px;
   }
-    #map
-    {
+  #map {
       position: relative;
       display: inline-block;
       width:100%;
@@ -191,17 +183,15 @@ img{
       background-color: orange;
     }
 
-    #voyageDesc
-    {
+  #voyageDesc {
       position: absolute;
       left: 0;
       top: 170px;
       width:100%;
       height: 200px;
-
     }
-    #mapdata
-    {
+
+  #mapdata {
       font-size:12px;
       position: absolute;
       left: 0;
@@ -209,16 +199,9 @@ img{
       width:33%;
       height: 200px;
     }
-    #mapdata h3{
+  #mapdata h3{
       font-size: 16px;
       font-weight: bold;
-    }
-
-    #buttons {
-      width:100%;
-      height:80px;
-      margin-left:15px;
-      margin-right: 15px;
     }
 }
 
@@ -227,7 +210,7 @@ img{
 </head>
 
 <body>
-  <!--<div id = "container">-->
+<!--<div id = "container">-->
 
       <div id ="header">
         <h1>Life on the ocean waves</h1>
@@ -266,7 +249,6 @@ var voyageLine = d3.line()
   .y(function(d) {return projection([d.lon, d.lat])[1];})
   .curve(d3.curveCatmullRom);
 
-
 var color = d3.scaleOrdinal()
   .range(["#2EFE64", "#FE642E" , "#FE2EC8","#81BEF7"]);
 
@@ -276,13 +258,12 @@ var tooltip = d3.select("body").append("div")
 
 d3.queue()
   .defer(d3.json, "data/world110m.json")
- //.defer(d3.csv, "data/voyageData.csv")
+  //.defer(d3.csv, "data/voyageData.csv")
  .defer(d3.csv, "data/multipleVoyages.csv")
   .await(ready);
 
 function ready (error, oceans, data){
 //function ready (error, data){ // testing only without map
-
 
 var dataGroup = d3.nest()
       .key(function(d) {return d.year;}).sortKeys(d3.ascending)
@@ -292,30 +273,27 @@ var dataGroup = d3.nest()
 dataGroup.forEach(function(d,i) {
 
 var ocean = svg.selectAll( "path" )
-.data(topojson.object(oceans, oceans.objects.countries)
-.geometries)
-  .enter()
-  .append( "path" )
-  .attr("fill", "white")
-  .attr( "d", geoPath );
+    .data(topojson.object(oceans, oceans.objects.countries)
+    .geometries)
+    .enter()
+    .append( "path" )
+    .attr("fill", "white")
+    .attr( "d", geoPath );
 
 var buttons = d3.select("#buttons").selectAll("button")
     .data(dataGroup)
     .enter()
     .append("button")
-    .attr("class", function(d){return "buttons voyage_" + d.key})
-    .attr("datagroup", function(d){return d.key})
+    .attr("class", "buttons")
     .attr("id", function(d){return "button_" + d.key})
     .append("label")
     .text(function(d){return d.key;})
 
-var voyageData =
-d3.select("#mapdata").selectAll(".voyageData")
+var voyageData = d3.select("#mapdata").selectAll(".voyageData")
     .data(dataGroup)
     .enter()
     .append("div")
     .attr("class", "voyageData")
-    .attr("data-group", function(d){return d.key})
     .attr("id", function(d){return "voyageText_" + d.key})
 
 var data = voyageData.selectAll(".data")
@@ -325,15 +303,12 @@ var data = voyageData.selectAll(".data")
     .attr("class", "data")
     .attr("id", function(d){return "data_" + d.key})
 
-var voyageDesc =
-d3.select("#voyageDesc").selectAll(".voyageDesc")
+var voyageDesc = d3.select("#voyageDesc").selectAll(".voyageDesc")
     .data(dataGroup)
     .enter()
     .append("div")
     .attr("class", "voyageDesc")
-    .attr("data-group", function(d){return d.key})
     .attr("id", function(d){return "voyageDesc_" + d.key})
-
 
 var desc = voyageDesc.selectAll(".desc")
     .data(function(d) {return d.values;})
@@ -341,7 +316,6 @@ var desc = voyageDesc.selectAll(".desc")
     .append("div")
     .attr("class", "data")
     .attr("id", function(d){return "desc_" + d.key})
-
 
 var images = voyageDesc.selectAll(".images")
     images.data(function(d) {return d.values;})
@@ -355,10 +329,8 @@ var voyageGroups = svg.selectAll(".voyageGroup")
     .enter()
     .append("g")
     .attr("class", function(d){return "voyageGroup voyage_" + d.key})
-    .attr("datagroup", function(d){return d.key})
     .attr("id", function(d){return "group_" + d.key})
     .on ("mouseover", mouseover);
-
 
 var paths = voyageGroups.selectAll(".journey")
     .data(function(d){return d.values})
@@ -370,7 +342,6 @@ var paths = voyageGroups.selectAll(".journey")
     .attr("fill", "none")
     .attr("stroke", function(d){ return color(d.key)})
     .attr("opacity",0)
-
 
 var voyageMarker = voyageGroups.selectAll(".voyageMarker")
    .data(function(d){ return d.values})
@@ -405,11 +376,11 @@ var placeVisited = placeGroups.selectAll("placeVisited")
 
    })
 
-
+//tooltip for individual places and dates
    .on("mouseover", function(d) {
      tooltip.transition()
          .duration(200)
-      .style("opacity", 1)
+         .style("opacity", 1)
      tooltip.html( d.placeName + "<br/>"+ d.arrivalDate + "</p>")
          .style('left',(d3.event.pageX + 10) + 'px')
          .style('top', (d3.event.pageY + 10) + 'px')
@@ -423,18 +394,20 @@ var placeVisited = placeGroups.selectAll("placeVisited")
 
   //button - click to start animation
   buttons.on("click", clickButton);
+
   //mouse over buttons to get voyage data and image
   buttons.on("mouseover", mouseover);
 
   var runningAnimation = null;
 
-  function stopAnimation(animation, voyageID) {
+  function stopAnimation(animation, voyageID, voyageClass) {
     clearInterval(animation);
 
     d3.select("#data_"+ voyageID).text("");
     d3.select("#mapdata").style("opacity", 0);
     d3.select("#path_" + voyageID).style("opacity", 0);
     d3.selectAll(".place_" + voyageID).style("opacity", 0.5)
+    d3.select("#button_" + voyageClass).style("background-color", null);
     runningAnimation = null;
   }
 
@@ -443,55 +416,56 @@ function clickButton(d,i) {
 
   var voyageClass = d.key;
   var voyageID = d.values[0].key;
-  console.log(voyageID)
 
   //style voyage line and circles
-  d3.selectAll(".place_" + voyageID).style("opacity", 1)
+  d3.selectAll(".place_" + voyageID).style("opacity", 1) // add back in
 
- if (runningAnimation) { stopAnimation(runningAnimation.animation, runningAnimation.voyageID); }
+  if (runningAnimation) { stopAnimation(runningAnimation.animation, runningAnimation.voyageID, runningAnimation.voyageClass); }
 
   //animate place name and dates
     var j = 0;
     var animation = setInterval(function(){
 
-    d3.select("#mapdata").style("opacity", 1);
+    d3.select("#mapdata").style("opacity", 1); // add back in
 
-d3.select("#data_"+ voyageID)
- .html(function(d) { return "<h3>" + d.values[j].voyageType + "</h3><p><span style ='font-weight:bold;'>" + d.values[j].arrivalDate + "<br/>" + d.values[j].placeName; + "</span></p>"});
-      j = j + 1;
+    d3.select("#data_"+ voyageID)
+     .html(function(d) { return "<h3>" + d.values[j].voyageType + "</h3><p><span style ='font-weight:bold;'>" + d.values[j].arrivalDate + "<br/>" + d.values[j].placeName; + "</span></p>"});
 
-      if(j==d.values[0].values.length) { stopAnimation(animation, voyageID); }
-      },1000);
+          j = j + 1;
 
-      runningAnimation = { animation: animation, voyageID: voyageID };
+          if(j==d.values[0].values.length) { stopAnimation(animation, voyageID, voyageClass); }
+          },1000);
 
-//animate circle marker
-d3.select("circle#Marker_"+ voyageID)
-    .transition()
-    .ease(d3.easeLinear)
-    .duration(9500)
-    .attrTween("transform", createPathTween);
+          runningAnimation = { animation: animation, voyageID: voyageID, voyageClass: voyageClass};
 
-//animate voyage path line
-d3.select("#path_" + voyageID)
-  .attr("stroke-dasharray", function() {
-    var totalLength = this.getTotalLength();
-    return totalLength + " " + totalLength;
-  })
-  .attr("stroke-dashoffset", function() {
-    var totalLength = this.getTotalLength();
-    return totalLength;
-  })
-  .transition()
-  .ease(d3.easeLinear)
-  .duration(9500)
-  .attr("stroke-dashoffset", 0)
-  .attr("opacity",1)
+      //animate circle marker
+      d3.select("circle#Marker_"+ voyageID)
+          .transition()
+          .ease(d3.easeLinear)
+          .duration(9500)
+          .attrTween("transform", createPathTween);
+
+      //animate voyage path line
+      d3.select("#path_" + voyageID)
+          .attr("stroke-dasharray", function() {
+            var totalLength = this.getTotalLength();
+            return totalLength + " " + totalLength;
+          })
+          .attr("stroke-dashoffset", function() {
+            var totalLength = this.getTotalLength();
+            return totalLength;
+          })
+          .transition()
+          .ease(d3.easeLinear)
+          .duration(9500)
+          .attr("stroke-dashoffset", 0)
+          .attr("opacity",1)
 }
 
 
-//Show voyage description and image on mouseover
 var runningchange = null;
+
+//Remove description and image when new button or voyage moused over
 function stopchange(change, voyageID) {
 
   d3.select("#desc_"+ voyageID).text("");
@@ -499,16 +473,16 @@ function stopchange(change, voyageID) {
   runningchange = null;
 }
 
+//Show voyage description and image on mouseover
 function mouseover(d,i) {
-  if (runningchange) { stopchange(runningchange.change, runningchange.voyageID); }
-
   var voyageClass = d.key;
   var voyageID = d.values[0].key;
 
-  //mouseover voyage group and make button color same
+  //change styles
   d3.select("#button_" + voyageClass).style("background-color", function(d){ return color(voyageID)})
-
   d3.select("#group_" + voyageClass).style("opacity", 1)
+
+  if (runningchange) { stopchange(runningchange.change, runningchange.voyageID); }
 
   var j = 0;
   var change = (function(){
@@ -520,38 +494,38 @@ function mouseover(d,i) {
 
     runningchange = { change: change, voyageID: voyageID };
 
-d3.select("#images_" + voyageID)
-  .append("a")
-  .attr("href", function(d){return d.values[j].groupURL })
-  .append("img")
-  .attr("src", function(d){return "images/" +d.values[j].groupPic });
+    d3.select("#images_" + voyageID)
+      .append("a")
+      .attr("href", function(d){return d.values[j].groupURL })
+      .append("img")
+      .attr("src", function(d){return "images/" +d.values[j].groupPic });
 
-d3.select("#desc_"+ voyageID)
-  .html(function(d) { return "<h3>" + d.values[j].voyageType + "</h3><h4><span style ='color:hotpink;font-size: 18px; font-weight:bold;'>" + d.values[j].period +"</span><br/><span style ='color:orange;font-size: 18px; font-weight:bold;'>" + d.values[j].voyageName + "</span></h4><p>" + d.values[j].voyageDesc; + "</p>"});
+    d3.select("#desc_"+ voyageID)
+      .html(function(d) { return "<h3>" + d.values[j].voyageType + "</h3><h4><span style ='color:hotpink;font-size: 18px; font-weight:bold;'>" + d.values[j].period +"</span><br/><span style ='color:orange;font-size: 18px; font-weight:bold;'>" + d.values[j].voyageName + "</span></h4><p>" + d.values[j].voyageDesc; + "</p>"});
 
 }
 
-//animate all voyages on opening page
+//animate all voyages on start
 function transition(){
    voyageMarker.transition()
-   .ease(d3.easeLinear)
-   .duration(9500)
-   .attrTween("transform", createPathTween)
+         .ease(d3.easeLinear)
+         .duration(9500)
+         .attrTween("transform", createPathTween)
 
    paths.transition()
-   .attr("stroke-dasharray", function() {
-     var totalLength = this.getTotalLength();
-     return totalLength + " " + totalLength;
-   })
-   .attr("stroke-dashoffset", function() {
-     var totalLength = this.getTotalLength();
-     return totalLength;
-   })
-   .transition()
-   .ease(d3.easeLinear)
-   .duration(9500)
-   .attr("stroke-dashoffset", 0)
-  // .on("end", transition);
+        .attr("stroke-dasharray", function() {
+           var totalLength = this.getTotalLength();
+           return totalLength + " " + totalLength;
+         })
+        .attr("stroke-dashoffset", function() {
+           var totalLength = this.getTotalLength();
+           return totalLength;
+         })
+        .transition()
+        .ease(d3.easeLinear)
+        .duration(9500)
+        .attr("stroke-dashoffset", 0)
+        // .on("end", transition);
 }
 
 transition();
