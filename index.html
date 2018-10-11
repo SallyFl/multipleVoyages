@@ -22,6 +22,7 @@ body {
 
 svg {
   display: block;
+  width:100%;
   margin: auto;
   background-color: #EAECEE;
   overflow:hidden;
@@ -60,6 +61,7 @@ img {
   font-size: 15px;
   text-decoration: none;
   margin-bottom: 10px;
+
 }
 
 .tooltip {
@@ -73,6 +75,15 @@ img {
   display: none;
 }
 
+#buttons {
+  width:100%;
+  height:80px;
+  margin-left:15px;
+  margin-right: 15px;
+}
+
+/*Needs more work to adjust to different screens but using this for now*/
+@media (min-width: 1281px) {
 #header {
     font-family: 'IBM Plex Serif', serif;
     background-color: #FE642E;
@@ -80,7 +91,7 @@ img {
     width:100%;
     margin-left:15px;
     margin-right: 15px;
-    padding: 15px;
+    padding: 10px;
   }
 
 #map {
@@ -108,14 +119,11 @@ img {
     height: 200px;
   }
 
-  #buttons {
-    width:100%;
-    height:80px;
-    margin-left:15px;
-    margin-right: 15px;
-  }
+}/*trying this here to fix little problem with svg smaller than header*/
 
-@media (min-width: 420px) and (max-width: 767px) {
+
+/*@media (min-width: 420px) and (max-width: 767px) {*/
+@media (min-width: 420px) and (max-width: 1280px) {
   h1{
     font-size: 28px;
   }
@@ -162,6 +170,7 @@ img {
       font-size: 16px;
       font-weight: bold;
     }
+
 }
 
 
@@ -210,6 +219,7 @@ img {
       font-size: 16px;
       font-weight: bold;
     }
+
 }
 
 
@@ -265,8 +275,8 @@ var tooltip = d3.select("body").append("div")
 
 d3.queue()
   .defer(d3.json, "data/world110m.json")
-  //.defer(d3.csv, "data/voyageData.csv")
- .defer(d3.csv, "data/multipleVoyages.csv")
+  .defer(d3.csv, "data/voyageData.csv")
+ //.defer(d3.csv, "data/multipleVoyages.csv")
   .await(ready);
 
 function ready (error, oceans, data){
