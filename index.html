@@ -75,6 +75,10 @@ img {
   display: none;
 }
 
+#header {
+    font-family: 'IBM Plex Serif', serif;
+  }
+
 #buttons {
   width:100%;
   height:80px;
@@ -85,7 +89,6 @@ img {
 /*Needs more work to adjust to different screens but using this for now*/
 @media (min-width: 1281px) {
 #header {
-    font-family: 'IBM Plex Serif', serif;
     background-color: #FE642E;
     color: #ffffff;
     width:100%;
@@ -275,11 +278,12 @@ var tooltip = d3.select("body").append("div")
 
 d3.queue()
   .defer(d3.json, "data/world110m.json")
- // .defer(d3.csv, "data/voyageData.csv")
+  //.defer(d3.csv, "data/voyageData.csv")
   .defer(d3.csv, "data/multipleVoyages.csv")
   .await(ready);
 
 function ready (error, oceans, data){
+//function ready (error, data){ // testing only without map
 
 var dataGroup = d3.nest()
       .key(function(d) {return d.year;}).sortKeys(d3.ascending)
