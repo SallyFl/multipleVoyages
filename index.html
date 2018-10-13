@@ -77,6 +77,12 @@ img {
 
 #header {
     font-family: 'IBM Plex Serif', serif;
+      background-color: #FE642E;
+    color: #ffffff;
+    width:100%;
+    margin-left:15px;
+    margin-right: 15px;
+    padding:5px;
   }
 
 #buttons {
@@ -88,14 +94,6 @@ img {
 
 /*Needs more work to adjust to different screens but using this for now*/
 @media (min-width: 1281px) {
-#header {
-    background-color: #FE642E;
-    color: #ffffff;
-    width:100%;
-    margin-left:15px;
-    margin-right: 15px;
-    padding: 10px;
-  }
 
 #map {
     position: relative;
@@ -137,10 +135,6 @@ img {
 
 #header{
     background-color: hotpink;
-    color: #ffffff;
-    width:100%;
-    margin-left:15px;
-    margin-right: 15px;
 }
   #map
   {
@@ -186,13 +180,6 @@ img {
     font-size: 20px;
   }
 
-  #header{
-      background-color: #FE642E;
-      color: #ffffff;
-      width:100%;
-      margin-left:15px;
-      margin-right: 15px;
-  }
   #map {
       position: relative;
       display: inline-block;
@@ -270,7 +257,7 @@ var voyageLine = d3.line()
   .curve(d3.curveCatmullRom);
 
 var color = d3.scaleOrdinal()
-  .range(["#2EFE64", "#FE642E" , "#FE2EC8","#81BEF7"]);
+.range(["#7401DF", "#FE642E" , "#24CB50","#FF69B4"]);
 
 //tooltip for mouseover
 var tooltip = d3.select("body").append("div")
@@ -278,8 +265,8 @@ var tooltip = d3.select("body").append("div")
 
 d3.queue()
   .defer(d3.json, "data/world110m.json")
-  //.defer(d3.csv, "data/voyageData.csv")
-  .defer(d3.csv, "data/multipleVoyages.csv")
+  .defer(d3.csv, "data/voyageData.csv")
+ //.defer(d3.csv, "data/multipleVoyages.csv")
   .await(ready);
 
 function ready (error, oceans, data){
