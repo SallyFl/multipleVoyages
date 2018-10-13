@@ -129,10 +129,6 @@ img {
     font-size: 28px;
   }
 
-  h3{
-    font-size: 18px;
-  }
-
 #header{
     background-color: hotpink;
 }
@@ -176,10 +172,6 @@ img {
     font-size: 28px;
   }
 
-  h3{
-    font-size: 18px;
-  }
-
   #map {
       position: relative;
       display: inline-block;
@@ -206,7 +198,7 @@ img {
       height: 200px;
     }
   #mapdata h3{
-      font-size: 16px;
+      font-size: 14px;
       font-weight: bold;
     }
 
@@ -257,7 +249,9 @@ var voyageLine = d3.line()
   .curve(d3.curveCatmullRom);
 
 var color = d3.scaleOrdinal()
-.range(["#7401DF", "#FE642E" , "#24CB50","#FF69B4"]);
+//  .range(["#2EFE64", "#FE642E" , "#FE2EC8","#81BEF7"]);// original colors
+.range(["#7401DF", "#FE642E" , "#24CB50","#FF69B4"]); // purple, orange, green, hotpink
+
 
 //tooltip for mouseover
 var tooltip = d3.select("body").append("div")
@@ -265,7 +259,7 @@ var tooltip = d3.select("body").append("div")
 
 d3.queue()
   .defer(d3.json, "data/world110m.json")
- // .defer(d3.csv, "data/voyageData.csv")
+  //.defer(d3.csv, "data/voyageData.csv")
   .defer(d3.csv, "data/multipleVoyages.csv")
   .await(ready);
 
