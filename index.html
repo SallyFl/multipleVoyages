@@ -38,7 +38,8 @@ img {
   stroke-width: 2;
   opacity: 0.5;
   }
-
+/*Removed svg circle styles from css to d3 html to try to fix issue with IE and Edge*/  
+/*
 [class*="place_"] {
       opacity: 0.5;
       r: 5;
@@ -50,6 +51,7 @@ img {
    fill: #00FF40;
   r:10;
 }
+*/
 
 .buttons{
   position: relative;
@@ -77,6 +79,12 @@ img {
 
 #header {
     font-family: 'IBM Plex Serif', serif;
+      background-color: #FE642E;
+    color: #ffffff;
+    width:100%;
+    margin-left:15px;
+    margin-right: 15px;
+    padding:5px;
   }
 
 #buttons {
@@ -88,14 +96,6 @@ img {
 
 /*Needs more work to adjust to different screens but using this for now*/
 @media (min-width: 1281px) {
-#header {
-    background-color: #FE642E;
-    color: #ffffff;
-    width:100%;
-    margin-left:15px;
-    margin-right: 15px;
-    padding: 10px;
-  }
 
 #map {
     position: relative;
@@ -131,16 +131,8 @@ img {
     font-size: 28px;
   }
 
-  h3{
-    font-size: 20px;
-  }
-
 #header{
     background-color: hotpink;
-    color: #ffffff;
-    width:100%;
-    margin-left:15px;
-    margin-right: 15px;
 }
   #map
   {
@@ -182,17 +174,6 @@ img {
     font-size: 28px;
   }
 
-  h3{
-    font-size: 20px;
-  }
-
-  #header{
-      background-color: #FE642E;
-      color: #ffffff;
-      width:100%;
-      margin-left:15px;
-      margin-right: 15px;
-  }
   #map {
       position: relative;
       display: inline-block;
@@ -219,7 +200,7 @@ img {
       height: 200px;
     }
   #mapdata h3{
-      font-size: 16px;
+      font-size: 14px;
       font-weight: bold;
     }
 
@@ -270,7 +251,9 @@ var voyageLine = d3.line()
   .curve(d3.curveCatmullRom);
 
 var color = d3.scaleOrdinal()
-  .range(["#2EFE64", "#FE642E" , "#FE2EC8","#81BEF7"]);
+//  .range(["#2EFE64", "#FE642E" , "#FE2EC8","#81BEF7"]);// original colors
+.range(["#7401DF", "#FE642E" , "#24CB50","#FF69B4"]); // purple, orange, green, hotpink
+
 
 //tooltip for mouseover
 var tooltip = d3.select("body").append("div")
@@ -278,7 +261,7 @@ var tooltip = d3.select("body").append("div")
 
 d3.queue()
   .defer(d3.json, "data/world110m.json")
-  //.defer(d3.csv, "data/voyageData.csv")
+ // .defer(d3.csv, "data/voyageData.csv")
  .defer(d3.csv, "data/multipleVoyages.csv")
   .await(ready);
 
@@ -388,6 +371,8 @@ var placeVisited = placeGroups.selectAll("placeVisited")
    .enter()
    .append("circle")
    .attr("class", function(d,i){return "place_" + d.voyageID})
+   .attr("r","5")
+   .attr("opacity", "0.5")
    .attr("cx", function(d, i) {
      return projection([d.lon, d.lat])[0];
    })
@@ -398,6 +383,10 @@ var placeVisited = placeGroups.selectAll("placeVisited")
 
 //tooltip for individual places and dates
    .on("mouseover", function(d) {
+     d3.select(this)
+     .attr("r", "10")
+     .attr("opacity", "1")
+
      tooltip.transition()
          .duration(200)
          .style("opacity", 1)
@@ -409,7 +398,8 @@ var placeVisited = placeGroups.selectAll("placeVisited")
      })
     .on("mouseout", function(d){
         d3.select(".tooltip").classed("hidden", true);
-        d3.select(this).attr("r",5)
+        d3.select(this)
+        .attr("r",5)
     })
 
   //button - click to start animation
@@ -578,4 +568,3 @@ $(window).resize(function() {
   </body>
 
   </html>
-
